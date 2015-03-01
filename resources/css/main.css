@@ -1,0 +1,196 @@
+@font-face {
+    font-family: myCustomFont;
+    src: url("../fonts/uvf-slimtony.ttf");
+}
+.container-fluid {
+    padding-right: 0px;
+    padding-left: 0px;
+}
+
+html, body {
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+.loading {
+    background-color: #ffffff;
+    background-image: url("../images/loading.gif");
+    background-repeat: no-repeat;
+    background-position: 49%;
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    z-index: 999999;
+}
+.pan-top {
+    width: 100%;
+    height: auto;
+    background-image: url("../images/top-bg.png");
+    background-repeat: no-repeat;
+    background-size: 100% 130%;
+}
+.pan-top .img-logo {
+    height: 90px;
+    margin-top: 40px
+}
+.pan-top .panel-left {
+    height: 150px;
+    padding-top: 30px;
+    padding-left: 35px;
+    color: #ffffff;
+    background-image: url("../images/panel-left-bg.png");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 100% 105px;
+}
+.pan-top .panel-left h4 {
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+.pan-top .panel-left h3 {
+    margin-top: 10px;
+    font-weight: bold;
+    font-size: 20px;
+}
+.pan-top a, .pan-top a:active, .pan-top a:visited, .pan-footer a, .pan-footer a:active, .pan-footer a:visited {
+    color: #ffffff;
+    text-decoration: none;
+}
+.pan-top a:hover, .pan-footer a:hover {
+    text-decoration: underline;
+}
+.pan-top .panel-right {
+    height: 150px;
+    padding-top: 40px;
+    padding-left: 0px;
+    text-align: center;
+    color: #ffffff;
+    background-image: url("../images/panel-right-bg.png");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 100% 105px;
+}
+.pan-top .panel-right h4 {
+    margin-top: 5px;
+    margin-bottom: 15px;
+    margin-left: 0px;
+    margin-right: 0px;
+    font-size: 21px;
+}
+.pan-menu {
+    background-color: #f47f20;
+}
+.pan-menu ul {
+    display: block;
+    background-color: #f47f20;
+    padding: 0px;
+}
+.pan-menu ul li {
+    display: block;
+    list-style: none;
+    height: 36px;
+    width: 14.2%;
+    background-color: #f47f20;
+    float: left;
+    line-height: 36px;
+    text-align: center;
+    font-weight: bold;
+}
+.pan-menu ul li:hover {
+    background-color: orange;
+}
+.pan-menu ul li a, .pan-menu ul li a:active, .pan-menu ul li a:visited, .pan-menu ul li a:hover {
+    text-decoration: none;
+    color: #ffffff;
+}
+
+.pan-footer {
+    position: relative;
+    height: 200px;
+    color: #ffffff;
+    background-image: url("../images/footer-bg.png");
+    background-repeat: repeat-y;
+    background-size: 100% 10px;
+}
+
+.pan-footer h4 {
+    margin-top: 20px;
+}
+.pan-footer .row h4 {
+    margin-top: 0px;
+}
+
+.pan-footer img {
+    position: absolute;
+    top: 65px;
+    left: 25px;
+    width: 100px;
+    border-radius: 10px;
+}
+
+.pan-body {
+    min-height: 400px;
+    position: relative;
+}
+
+.font-custom {
+    font-family: myCustomFont;
+}
+
+@media screen and (max-width: 1199px) {
+    .pan-top .panel-right h4 {
+        margin-top: 0px;
+        font-size: 20px;
+    }
+    .pan-top .panel-left h4 {
+        font-size: 16px;
+    }
+}
+
+@media screen and (max-width: 991px) {
+    .pan-top .panel-left {
+        padding-left: 25px;
+        padding-top: 35px;
+    }
+    .pan-top .panel-left h4 {
+        font-size: 13px;
+    }
+    .pan-top .panel-left h3 {
+        font-size: 15px;
+    }
+    .pan-top .panel-right h4 {
+        margin-top: 5px;
+        margin-bottom: 5px;
+        margin-left: 0px;
+        margin-right: 0px;
+        font-size: 18px;
+    }
+
+    .pan-footer {
+        height: 280px;
+    }
+    .pan-footer img {
+        position: relative;
+        top: 0px;
+        left: 0px;
+        margin: auto;
+        width: 150px;
+        border-radius: 10px;
+    }
+}
+@media screen and (max-width: 767px) {
+    .pan-top {
+        background-image: none;
+    }
+    .pan-top .panel-right {
+        height: 200px;
+        padding-top: 20px;
+        background-size: 100% 205px;
+    }
+    .pan-top .panel-right h4 {
+        margin-top: 0px;
+        margin-bottom: 10px;
+    }
+}
