@@ -27,3 +27,12 @@ var adminLogin = {
     this.setup();
   }
 }
+
+var adminPage = {
+  setup: function(){
+
+  },
+  run: function(){
+    this.setup();
+  }
+}

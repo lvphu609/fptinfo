@@ -11,6 +11,9 @@ class Admin extends CI_Controller {
                     'bootstrap.min.js',
                     'mod_login.js'
                 ];
+    public static $dataCss = [
+                    'admin_page.css'
+                ];
 
 	public function __construct()
 	{
@@ -21,11 +24,16 @@ class Admin extends CI_Controller {
 	}
 
     public function index(){
-        if(empty(static::$user_session)){  
-            $data['js_file'] = static::$dataJs;          
+        $data['js_file'] = static::$dataJs;
+        $data['css_file'] = static::$dataCss;
+
+        if(empty(static::$user_session)){           
             $this->load->view('admin/login',$data);
         }else{
-            $this->load->view('admin/header');
+            $this->load->view('admin/pages/header',$data);
+            $this->load->view('admin/pages/menu');
+            $this->load->view('admin/pages/dashboard',$data);
+            $this->load->view('admin/pages/footer');
         }
     }
 
