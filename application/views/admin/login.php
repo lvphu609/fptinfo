@@ -18,7 +18,7 @@ $resources = base_url().'resources/';
 <div class="container">
     <div class="row vertical-offset-100">
     	<div class="col-md-6 col-md-offset-3">
-    		<div class="panel panel-default">
+    		<div class="login-panel panel panel-default">
 			  	<div class="panel-heading">
             <div class="avatar"></div>
 			 	  </div>
