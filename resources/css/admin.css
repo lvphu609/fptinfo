@@ -1,11 +1,13 @@
 body{
   height: 100%;
-  background: #F58220;  
+  background: #f8f8f8; /*#F58220; */ 
 }
 
 .panel.panel-default{
   border: none !important;
-  box-shadow: 1px 1px 10px 1px;
+  box-shadow: 1px 1px 1px 0px;
+  /*border-color: 2px solid #ddd !important; */
+  /*border: 1px solid transparent;*/
 }
 .vertical-offset-100{
     padding-top:15%;

@@ -22,9 +22,13 @@
 
 .panel-heading{
    /*background-image: none !important;*/
-   /*background-color: #F58220 !important;*/
-   background: url('../images/footer-bg.png') !important;;
+   background-color: #F58220 !important;
+   /*background: url('../images/footer-bg.png') !important;*/
    /*height: 50px !important;*/
+}
+
+.panel-heading-daskboard{
+  background: url('../images/footer-bg.png') !important;
 }
 
 .col-md-offset-3 {
@@ -54,3 +58,47 @@ margin-left: 2.5%;
   font-weight: normal;
 }*/
 
+.clear{
+  clear: both;
+}
+
+#loading{
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 100%;
+    background-color: #FFFFFF;
+    background-image: url("../../resources/images/ajax-loader.gif");
+    background-repeat: no-repeat;
+    background-position: 50%;
+    /*background-size: 50px 50px;*/
+    opacity: .9;
+    z-index: 9999999;
+    /*display: none;*/
+}
+
+.box-create-article{
+
+}
+
+.btn-create-article, .btn-save-top{
+  margin-bottom: 20px;
+}
+
+.button-add-article{
+  margin-top: 10px;
+  margin-left: 15px;
+}
+
+.title-article{
+  line-height: 35px;
+}
+
+.text-center{
+  text-align: center;
+}
+
+tr.cursor_pointer{
+  cursor: pointer !important;
+}
