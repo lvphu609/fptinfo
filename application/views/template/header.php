@@ -1,5 +1,6 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
+    defined('BASEPATH') OR exit('No direct script access allowed');
+    $resources = base_url().'resources/';
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -8,9 +9,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 
     <title><?php echo (!empty($title) ? $title : 'FPT services'); ?></title>
-    <link rel="stylesheet" href="resources/css/bootstrap.min.css">
-    <link rel="stylesheet" href="resources/css/bootstrap-theme.min.css">
-    <link rel="stylesheet" href="resources/css/main.css">
+    <link rel="stylesheet" href="<?php echo $resources; ?>/css/bootstrap.min.css">
+    <link rel="stylesheet" href="<?php echo $resources; ?>/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="<?php echo $resources; ?>/css/main.css">
 </head>
 <body>
     <div id="loading" class="loading"></div>
@@ -44,15 +45,4 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                 </div>
             </div>
         </div>
-        <div class="container pan-menu">
-            <ul>
-                <li><a href="#" >TRANG CHỦ</a></li>
-                <li><a href="#" >INTERNET</a></li>
-                <li><a href="#" >TRUYỀN HÌNH</a></li>
-                <li><a href="#" >KHUYẾN MÃI</a></li>
-                <li><a href="#" >HỖ TRỢ KỸ THUẬT</a></li>
-                <li><a href="#" >CHÍNH SÁCH THỦ TỤC</a></li>
-                <li><a href="#" >TUYỂN DỤNG</a></li>
-            </ul>
-        </div>
-        <div class="container pan-body">
+        

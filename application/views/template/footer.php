@@ -1,3 +1,8 @@
+<?php
+    $resources = base_url().'resources/';
+?>
+
+            <div class="clear"></div>
             </div>
             <div class="container pan-footer text-center">
                 <h4>CHI NHÁNH CẦN THƠ - CÔNG TY CỔ PHẦN VIỄN THÔNG FPT</h4>
@@ -11,8 +16,9 @@
             </div>
 
         </div>
-        <script type="text/javascript" src="resources/js/jquery-2.1.3.min.js"></script>
-        <script type="text/javascript" src="resources/js/bootstrap.min.js"></script>
-        <script type="text/javascript" src="resources/js/main.js"></script>
+        <script type="text/javascript" src="<?php echo $resources; ?>/js/jquery-2.1.3.min.js"></script>
+        <script type="text/javascript" src="<?php echo $resources; ?>/js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="<?php echo $resources; ?>/js/main.js"></script>
+
     </body>
 </html>
