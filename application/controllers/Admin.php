@@ -5,15 +5,15 @@ class Admin extends CI_Controller {
 
     public static $user_session;
 
-    public static $dataJs = [
+    public static $dataJs = array(
                     'jquery-2.1.3.min.js',
                     'jquery.md5.js',
                     'bootstrap.min.js',
                     'mod_login.js'
-                ];
-    public static $dataCss = [
+                );
+    public static $dataCss = array(
                     'admin_page.css'
-                ];
+                );
 
     public static $paging_limit = 10;
 
