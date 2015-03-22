@@ -42,6 +42,9 @@
                         <li>
                             <a href="<?php echo base_url(); ?>index.php/admin/menu"><i class="fa fa-bars"></i> Quản lý menu</a>
                         </li>
+                         <li>
+                            <a href="<?php echo base_url(); ?>index.php/admin/carousel"><i class="fa fa-picture-o"></i> Carousle</a>
+                        </li>
                         <li>
                             <a href="<?php echo base_url(); ?>index.php/admin/filemanager"><i class="fa fa-folder"></i> Thư viện tập tin</a>
                         </li>

@@ -180,15 +180,21 @@ class Admin_model extends CI_Model {
 
   public function storeMenu($input){
     $name = $input['mn_name'];
+    $parent_id = $input['mn_parent_id'];
     $position = $input['mn_position'];
+    if(strcmp($position,"top") == 0 || $parent_id == ""){
+       $parent_id = NULL;
+    }
     $article_id = $input['mn_article_id'];
-
+    $sort_order = $input['sort_order'];
     $date = getCurrentDate();
 
     $data = array(
        'name' => $name ,
        'positions' => $position ,
        'article_id' => $article_id,
+       'sort_order' => $sort_order,
+       'parent' => $parent_id,
        'created_at' => $date,
        'updated_at' => $date
     );
@@ -198,10 +204,11 @@ class Admin_model extends CI_Model {
   }
 
   public function menuList($paging_limit,$page = NULL,$data_filter = NULL){
-    $this->db->select('me.id,me.name,me.positions,me.article_id,art.title');
+    $this->db->select('me.id,me.name,me.positions,me.sort_order,me.parent,me.article_id,art.title');
     $this->db->from('menu as me');
     $this->db->where('me.deleted_at',NULL);
-    $this->db->join('articles as art','me.article_id = art.id');
+    $this->db->join('articles as art','me.article_id = art.id','left');
+    $this->db->order_by('me.sort_order','ASC');
     if ($page !== null)
     {
       $begin = ($page - 1)*$paging_limit;
@@ -215,15 +222,22 @@ class Admin_model extends CI_Model {
   public function updateMenu($input){
     $id = $input['menu-id'];
     $name = $input['mn_name'];
+    $parent_id = $input['mn_parent_id'];
     $position = $input['mn_position'];
+    if(strcmp($position,"top") == 0 || $parent_id == ""){
+       $parent_id = NULL;
+    }
     $article_id = $input['mn_article_id'];
-
+    $sort_order = $input['sort_order'];
+    
     $date = getCurrentDate();
 
     $data = array(
        'name' => trim($name) ,
        'positions' => $position ,
        'article_id' => $article_id,
+       'sort_order' => $sort_order,
+       'parent' => $parent_id,
        'updated_at' => $date
     );
     $this->db->update('menu', $data,array('id' => $id)); 
@@ -239,6 +253,119 @@ class Admin_model extends CI_Model {
         return $this->getFieldById('menu','name',$id);
     }
   }
+
+  public function countMenuRecord($positions,$menu_id){
+    $this->db->from('menu');
+    $this->db->where('deleted_at',NULL);
+    $this->db->where('positions',$positions);
+    $this->db->where('id <>',$menu_id);
+    $this->db->where('parent',NULL);
+    $total = $this->db->count_all_results();
+    return $total;
+  }
+
+  public function menuListPosition($paging_limit,$page = NULL,$data_filter = NULL,$positions,$menu_id){
+    $this->db->from('menu');
+    $this->db->where('deleted_at',NULL);
+    $this->db->where('positions',$positions);
+    $this->db->where('id <>',$menu_id);
+    $this->db->where('parent',NULL);
+    if ($page !== null)
+    {
+      $begin = ($page - 1)*$paging_limit;
+      $this->db->limit($paging_limit, $begin);
+    }
+    $query = $this->db->get();
+    $result = $query->result_array();
+    return $result;
+  }
+
+  public function searchMenuPosition($key,$positions,$menu_id){
+    $this->db->from('menu');
+    $this->db->where('deleted_at',NULL);
+    $this->db->where('positions',$positions);
+    $this->db->where('id <>',$menu_id);
+    $this->db->where('parent',NULL);
+    $this->db->like('name', $key);
+    $query = $this->db->get();
+    $result = $query->result_array();
+    return $result;
+  }
+
+  public function getMenuById($id){
+    $this->db->select('me.id,me.name,me.positions,me.sort_order,me.parent,me.article_id,art.title');
+    $this->db->from('menu as me');
+    $this->db->where('me.id',$id);
+    $this->db->join('articles as art','me.article_id = art.id','left');
+    $query = $this->db->get();
+    $result = $query->result_array();
+    return $result[0];
+  }
+
+  public function carouselList($paging_limit,$page = NULL,$data_filter = NULL){
+    $this->db->select('*');
+    $this->db->from('carousel');
+    $this->db->where('deleted_at',NULL);
+    $this->db->order_by('sort_order','ASC');
+    if ($page !== null)
+    {
+      $begin = ($page - 1)*$paging_limit;
+      $this->db->limit($paging_limit, $begin);
+    }
+    $query = $this->db->get();
+    $result = $query->result_array();
+    return $result;
+  }
+
+  public function storeCarousel($input){
+    $img_url = $input['img_url'];
+    $sort_order = $input['sort_order'];
+    $date = getCurrentDate();
+    $data = array(
+       'img_url' => $img_url ,
+       'sort_order' => $sort_order,
+       'created_at' => $date,
+       'updated_at' => $date
+    );
+    $this->db->insert('carousel', $data); 
+  }
+
+  public function getCarouselById($id){
+    $this->db->select('*');
+    $this->db->from('carousel');
+    $this->db->where('id',$id);
+    $query = $this->db->get();
+    $result = $query->result_array();
+    return $result[0];
+  }
+
+
+  public function updateCarousel($input){
+    $id = $input['carousel-id'];
+    $img_url = $input['img_url'];
+    $sort_order = $input['sort_order'];
+    $date = getCurrentDate();
+
+    $data = array(
+       'img_url' => $img_url ,
+       'sort_order' => $sort_order,
+       'updated_at' => $date
+    );
+    $this->db->update('carousel', $data,array('id' => $id)); 
+
+  }
+
+  public function delCarousel($id){
+    $data = array('deleted_at' => getCurrentDate());
+    $isDelete = $this->db->update('carousel',$data,array('id' => $id));
+    if ($isDelete) {            
+        return true;
+    } else {
+        return $this->getFieldById('carousel','img_url',$id);
+    }
+  }
+  
+
 
 
 }

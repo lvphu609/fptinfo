@@ -5,7 +5,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 
     <title><?php echo (!empty($title) ? $title : 'FPT services'); ?></title>
@@ -20,7 +20,7 @@
             <div class="container">
                 <div class="row">
                     <div class="col-sm-2 col-xs-12 text-center">
-                        <a href="<?php echo index_page(); ?>">
+                        <a href="<?php echo base_url(); ?>index.php/home">
                             <img class="img-logo" src="<?php echo base_url('resources/images/logo.png'); ?>">
                         </a>
                     </div>

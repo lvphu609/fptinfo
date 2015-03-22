@@ -483,3 +483,56 @@ html, body {
     padding: 0px !important;
 }
 
+.box-search{
+    padding: 0px !important; 
+    padding-top: 2px !important;
+    padding-bottom: 2px !important; 
+}
+
+.box-search input, .box-search button{
+    border-radius: 0px !important;
+}
+
+
+
+.box-search-result {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.box-search-result li {
+    margin-bottom: 10px;
+    padding-bottom: 5px;
+    border-bottom: 1px dotted #999;
+}
+
+.box-search-result li.left .serch-body {
+    margin-left: 60px;
+}
+
+.box-search-result li.right .serch-body {
+    margin-right: 60px;
+}
+
+.box-search-result li .serch-body p {
+    margin: 0;
+}
+
+.box-search-result .glyphicon {
+    margin-right: 5px;
+}
+
+.carousel-inner > .item > img,
+.carousel-inner > .item > a > img {
+  width: 100%;
+  margin: auto;
+}
+.carousel-box{
+    padding: 0px !important;
+}
+
+#myCarousel{
+    max-height: 400px;
+    overflow: hidden;
+}
