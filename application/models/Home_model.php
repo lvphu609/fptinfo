@@ -122,5 +122,14 @@ class Home_model extends CI_Model {
         }
     }
 
+    public function getHomeArticle(){
+          $this->db->from('articles');
+          $this->db->where('deleted_at',NULL);
+          $this->db->where('home_show',1);
+          $query = $this->db->get();
+          $result = $query->result_array();
+          return $result;
+    }
+
 
  }

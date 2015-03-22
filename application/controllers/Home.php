@@ -13,15 +13,16 @@ class Home extends CI_Controller {
     {
         $searchKey = $this->input->post('fpt_search');
         $datasearch = array();
-        $content_home = NULL;
+        // $content_home = NULL;
         $carousel_data = NULL;
-
+        $article_home_list = NULL;
         if(!empty($searchKey)){
             $datasearch = $this->home_model->search(trim($searchKey));
         }else{
             $searchKey = NULL;
-            $content_home = $this->home_model->getContentHomePage();
+            // $content_home = $this->home_model->getContentHomePage();
             $carousel_data = $this->home_model->getCarousel();
+            $article_home_list = $this->home_model->getHomeArticle();
         }
 
         $data = array(
@@ -31,8 +32,9 @@ class Home extends CI_Controller {
             'menu_left' => $this->home_model->parseMenuByPosition('left'),
             'data_search' => $datasearch,
             'search_key' => $searchKey,
-            'content_home' => $content_home,
-            'carousel_data' => $carousel_data
+            // 'content_home' => $content_home,
+            'carousel_data' => $carousel_data,
+            'article_home_list' => $article_home_list
         );
 
         $this->load->view('template/header', $data);

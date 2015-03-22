@@ -536,3 +536,12 @@ html, body {
     max-height: 400px;
     overflow: hidden;
 }
+
+.article-pannel-item .panel-heading{
+    background-color: #f47f20;
+    margin-top: 10px;
+}
+
+.article-pannel-item .panel-heading strong{
+    color: #ffffff;
+}

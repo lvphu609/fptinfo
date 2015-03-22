@@ -72,6 +72,20 @@
                     </div>
                 </div>
             </div>
+            <div class="col-lg-12">
+                <div class="form-group title-article">
+                    <div class="col-sm-10">
+                      <label><input name="home_show" type="checkbox"
+                       <?php 
+                                if(!empty($article)){
+                                    if($article['home_show'] == 1){
+                                        echo "checked";
+                                    }
+                                }
+                        ?> value="1"> Show trang chủ</label>
+                    </div>
+                </div>
+            </div>
         </div>
         <div class="row">
             <div class="col-lg-12">
@@ -85,7 +99,7 @@
             </div>
             <!-- /.col-lg-12 -->
         </div>
-        <!-- <input type="hidden" id="content_html" name="content_html" /> -->
+        <input type="hidden" id="content_html" name="content_html" />
         <?php if(!empty($article)): ?>
             <input name="article-id" type="hidden" value="<?php echo $article['id']; ?>">
         <?php endif; ?>

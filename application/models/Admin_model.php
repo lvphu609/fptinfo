@@ -76,7 +76,7 @@ class Admin_model extends CI_Model {
     $content = $input['box-content-article'];
     $title = $input['title-article'];
     $desc = $this->shorter($content,120);
-
+    $home_show = $input['home_show'];
     $date = getCurrentDate();
 
     $data = array(
@@ -84,6 +84,7 @@ class Admin_model extends CI_Model {
        'content' => trim($content),
        'desc' => $desc,
        'created_at' => $date,
+       'home_show' => $home_show,
        'updated_at' => $date
     );
 
@@ -145,12 +146,13 @@ class Admin_model extends CI_Model {
     $title = $input['title-article'];
     $desc = $this->shorter($content,120);
     $id = $input['article-id'];
-
+    $home_show = $input['home_show'];
     $date = getCurrentDate();
 
     $data = array(
        'title' => trim($title) ,
        'content' => trim($content) ,
+       'home_show' => $home_show,
        'desc' => $desc,
        'updated_at' => $date
     );

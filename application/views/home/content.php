@@ -5,13 +5,13 @@
 		$class_content = "detail-page-content col-lg-8";
 	}
 ?>
-<div class="row float-left <?php echo $class_content; ?> col-xs-12 col-sm-12 col-md-12">
+<div class="row float-left <?php echo $class_content; ?> col-xs-12">
     <div class="ftp-content col-lg-12">
 
     	<?php if(empty($article_content_detail) && empty($search_key) ) : ?>
     		<?php if(!empty($carousel_data)) { ?>
     			
-			    	<div class="carousel-box col-lg-12"> 
+			    	<div class="carousel-box"> 
 			    		<div id="myCarousel" class="carousel slide" data-ride="carousel">
 
 			    			
@@ -42,12 +42,47 @@
 						      <span class="sr-only">Next</span>
 						    </a>
 						  </div>
-						</div>
-			    	</div>
+					</div>
 			    
 		    <?php } ?>
 
-	    	<?php if(!empty($content_home)) echo $content_home; ?>
+	    	<?php /* if(!empty($content_home)){
+	    			$content_home = str_replace('<img src="../../resources/uploads/source/','<img src="'.base_url().'resources/uploads/source/', $content_home);
+		        		echo $content_home; 
+		        	} */
+	    	?>
+	    	
+	    	<?php if(!empty($article_home_list)) : ?>
+	    		<?php foreach ($article_home_list as $key => $art) { ?>
+	    			<div class="panel article-pannel-item">
+		                <div class="panel-heading">
+		                	<strong><?php echo $art['title']; ?></strong>              
+		                </div>
+		                <!-- /.panel-heading -->
+		                <div class="panel-body">
+		                	<?php 
+		                		/*if(strpos($art['content'], '<img src="../../resources/uploads/source/')){
+			                		$temp = substr($art['content'],0,strpos($art['content'],'<img src="../../resources/uploads/source/'));
+			                		//$image = substr($art['content'], strpos($art['content'],'<img src="../../resources/uploads/source/'), strpos($art['content'],'>',strpos($art['content'],'<img src="../../resources/uploads/source/') - strpos($art['content'],'<img src="../../resources/uploads/source/')));
+			                		$new_content = str_replace($temp,'', $art['content']);
+			                		$image = substr($new_content,0,strpos($new_content,'>')+1);
+			                		$image = str_replace('src="../../resources/uploads/source/','src="'.base_url().'resources/uploads/source/',$image);
+			                		$content = $temp.$image;
+			                		echo $content;
+			                	}else{
+			                		$temp = substr($art['content'],0,strpos($art['content'],'</p>', 100) + 1);
+			                		var_dump($temp);
+			                	}*/
+			                	$temp = str_replace('<img src="../../resources/uploads/source/','<img src="'.base_url().'resources/uploads/source/', $art['content']);
+			                	echo $temp;
+		                	?>
+		                </div>
+		                <!-- /.panel-body -->
+		            </div>
+	    		<?php } ?>
+        	<?php endif; ?>
+
+
 
     	<?php endif; ?>
 
