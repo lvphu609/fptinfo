@@ -351,11 +351,45 @@ class Admin extends CI_Controller {
         echo $html;
     }
 
+    public function ajax_menu_paging(){
+        $page = $this->input->post('page');
+        $pos = $this->input->post('pos');
+        $menu_id = $this->input->post('menu_id');
+        $numMenuRecord = $this->admin_model->countMenuRecord($pos,$menu_id);
+
+        $content = array(
+          'list_menu' => $this->admin_model->menuListPosition(static::$paging_ajax_limit,$page,NULL,$pos,$menu_id)
+        );
+
+        $html = $this->load->view('admin/pages/list_menu_paging', $content, true);
+
+        $arr = array(
+          'html' => $html,
+          'totalField' => $numMenuRecord,
+          'numFieldPerPage' => static::$paging_ajax_limit
+        );
+        $json = json_encode($arr);
+
+        echo $json;
+    }
+
+    public function ajax_search_menu(){
+        $key = $this->input->post('key');
+        $pos = $this->input->post('pos');
+        $menu_id = $this->input->post('menu_id');
+        $content = array(
+           'list_menu' => $this->admin_model->searchMenuPosition($key,$pos,$menu_id)
+        );
+        $html = $this->load->view('admin/pages/list_menu_paging', $content, true);
+
+        echo $html;
+    }
+
      public function menu_edit(){        
         if(empty(static::$user_session)) header('Location: '.base_url().'index.php/admin');
 
         $id = $this->input->get('me');
-        $data['menu'] =  $this->admin_model->getFieldById('menu','id,name,positions,article_id',$id);
+        $data['menu'] =  $this->admin_model->getMenuById($id);
         $data['css_file'] = static::$dataCss;
         $this->load->view('admin/pages/header',$data);
         $this->load->view('admin/pages/menu');
@@ -388,6 +422,114 @@ class Admin extends CI_Controller {
         }else{
             $message = '<div class="alert alert-warning" role="alert">
                         <strong>Cảnh báo!</strong>Không xóa được menu <strong>'. $isDelete['name'] .'</strong>
+                    </div>';
+        }
+        
+        $result = array(
+            'status' => $status,
+            'result' => $id,
+            'message' => $message
+        );
+        header('Content-Type: application/x-json; charset=utf-8');
+        echo (json_encode($result));
+    }
+
+     public function carousel(){
+        if(empty(static::$user_session)) header('Location: '.base_url().'index.php/admin');
+
+        //paging----
+        $page = 1;
+
+        if(isset($_GET['page'])){
+          if(!empty($_GET['page'])&&$_GET['page']!=""&&$_GET['page']!=null&&  is_numeric($_GET['page'])){
+            $page = intval($_GET['page']);
+          }
+        }
+        if(isset($_POST['page'])){
+          if(!empty($_POST['page'])&&$_POST['page']!=""&&$_POST['page']!=null&&  is_numeric($_POST['page'])){
+            $page = intval($_POST['page']);
+          }
+        }        
+        
+        $this->load->library('fpt_paging');
+        $config['base_url'] = base_url('index.php/admin/carousel?');
+        $config['total_rows'] = $this->admin_model->countRecord('carousel');
+        $config['per_page'] = static::$paging_limit;
+        $config['cur_page'] =$page;
+
+
+        $this->fpt_paging->initialize($config);
+        $pagination = $this->fpt_paging->create_links();
+        //end paging---
+
+        $data['carousel_list'] = $this->admin_model->carouselList(static::$paging_limit,$page);
+        $data['pagination'] = $pagination;
+
+        $data['css_file'] = static::$dataCss;
+        $this->load->view('admin/pages/header',$data);
+        $this->load->view('admin/pages/menu');
+        $this->load->view('admin/pages/carousel',$data);
+        $this->load->view('admin/pages/footer');
+    }
+
+    
+    public function carousel_create(){
+        if(empty(static::$user_session)) header('Location: '.base_url().'index.php/admin');
+        $data['css_file'] = static::$dataCss;
+        $this->load->view('admin/pages/header',$data);
+        $this->load->view('admin/pages/menu');
+        $this->load->view('admin/pages/carousel_create',$data);
+        $this->load->view('admin/pages/footer');
+    }
+
+    public function carousel_store(){
+        if(empty(static::$user_session)) header('Location: '.base_url().'index.php/admin');
+
+        $input = $this->input->post(NULL, TRUE);
+
+        $this->admin_model->storeCarousel($input);
+
+        header('Location: '.base_url().'index.php/admin/carousel');
+
+    }
+
+    public function carousel_edit(){        
+        if(empty(static::$user_session)) header('Location: '.base_url().'index.php/admin');
+
+        $id = $this->input->get('ca');
+        $data['carousel'] =  $this->admin_model->getCarouselById($id);
+        $data['css_file'] = static::$dataCss;
+        $this->load->view('admin/pages/header',$data);
+        $this->load->view('admin/pages/menu');
+        $this->load->view('admin/pages/carousel_create',$data);
+        $this->load->view('admin/pages/footer');
+    }
+
+    public function carousel_update(){
+        if(empty(static::$user_session)) header('Location: '.base_url().'index.php/admin');
+
+        $input = $this->input->post(NULL, TRUE);
+
+        $this->admin_model->updateCarousel($input);
+
+        header('Location: '.base_url().'index.php/admin/carousel');
+
+    }
+
+    public function del_carousel(){
+        if(empty(static::$user_session)) return false;
+
+        $id = $this->input->post('id');
+
+        $isDelete = $this->admin_model->delCarousel($id);
+
+        $message = "";
+        $status = "fail";
+        if(!is_array($isDelete)){            
+            $status = "success";
+        }else{
+            $message = '<div class="alert alert-warning" role="alert">
+                        <strong>Cảnh báo!</strong>Không xóa được image url <strong>'. $isDelete['img_url'] .'</strong>
                     </div>';
         }
         

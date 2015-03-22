@@ -16,12 +16,12 @@
         </div>
         <div id="navbarCollapse" class="collapse navbar-collapse">
             <ul class="nav navbar-nav">
-                <li><a href="#" >TRANG CHỦ</a></li>
-                <li><a href="#" >INTERNET</a></li>
-                <li><a href="#" >TRUYỀN HÌNH</a></li>
-                <li><a href="#" >KHUYẾN MÃI</a></li>
-                <li><a href="#" >HỖ TRỢ KỸ THUẬT</a></li>
-                <li><a href="#" >CHÍNH SÁCH THỦ TỤC</a></li>
+                <li><a href="<?php echo base_url(); ?>index.php/home" >TRANG CHỦ</a></li>
+                <?php if(count($menu_top) > 0) : ?>
+                    <?php foreach ($menu_top as $mn_top) : ?>
+                        <li><a href="<?php echo base_url(); ?>index.php/home/article/<?php echo $mn_top['article_id']; ?>" ><?php echo $mn_top['name']; ?></a></li>
+                    <?php endforeach; ?>
+                <?php endif; ?>
                 <li><a href="#" >TUYỂN DỤNG</a></li>
             </ul>
         </div>
