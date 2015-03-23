@@ -14,7 +14,7 @@ html, body {
 }
 .loading {
     background-color: #ffffff;
-    background-image: url("../images/loading.gif");
+    background-image: url("../images/ajax-loader.gif");
     background-repeat: no-repeat;
     background-position: 49%;
     width: 100%;
