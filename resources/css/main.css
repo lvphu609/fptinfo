@@ -545,3 +545,44 @@ html, body {
 .article-pannel-item .panel-heading strong{
     color: #ffffff;
 }
+.scroll-top-wrapper {
+    /*position: fixed;*/
+    opacity: 0;
+    visibility: hidden;
+    overflow: hidden;
+    text-align: center;
+    z-index: 99999999;
+    background-color: #f47f20;/*#f47f20;*/
+    color: orange;
+    width: 40px;
+    height: 40px;
+    line-height: 40px;
+    right: 30px;
+    bottom: 30px;
+    padding-top: 2px;
+    border-radius: 1000px;
+    -webkit-transition: all 0.5s ease-in-out;
+    -moz-transition: all 0.5s ease-in-out;
+    -ms-transition: all 0.5s ease-in-out;
+    -o-transition: all 0.5s ease-in-out;
+    transition: all 0.5s ease-in-out;
+    margin-top: -30px;
+    /*margin-right: 50px;*/
+    border: 1px solid #FFFFFF;
+}
+.scroll-top-wrapper:hover {
+    background-color: orange;
+}
+.scroll-top-wrapper.show {
+    visibility:visible;
+    cursor:pointer;
+    opacity: 1.0;
+    float: right;
+    /*margin-top: -70px;
+    margin-right: 50px;*/
+}
+.scroll-top-wrapper i.glyphicon {
+    /*line-height: inherit;*/
+    color: #FFFFFF;
+    font-size: 20px;
+}
