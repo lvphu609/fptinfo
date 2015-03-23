@@ -7,6 +7,11 @@
             <div class="container pan-footer text-center">
                 <h4>CHI NHÁNH CẦN THƠ - CÔNG TY CỔ PHẦN VIỄN THÔNG FPT</h4>
                 <h4 class="font-custom">Mọi Dịch Vụ Trên Một Kết Nối</h4>
+                <div class="scroll-top-wrapper "> <!-- hidden-xs hidden-sm hidden-md -->
+                    <span class="scroll-top-inner">
+                        <i class="glyphicon glyphicon-triangle-top"></i>
+                    </span>
+                </div>
                 <img class="img-logo" src="<?php echo base_url('resources/images/logo-footer.png'); ?>">
                 <h4>Địa chỉ: 190E đường 30/04, phường Hưng Lợi, quận Ninh Kiều, TP. Cần Thơ</h4>
                 <div class="row">
