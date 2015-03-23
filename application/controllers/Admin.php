@@ -160,7 +160,7 @@ class Admin extends CI_Controller {
         if(empty(static::$user_session)) header('Location: '.base_url().'index.php/admin');
 
         $id = $this->input->get('art');
-        $data['article'] =  $this->admin_model->getFieldById('articles','id,title,content',$id);
+        $data['article'] =  $this->admin_model->getFieldById('articles','id,title,content,home_show',$id);
         $data['css_file'] = static::$dataCss;
         $this->load->view('admin/pages/header',$data);
         $this->load->view('admin/pages/menu');
@@ -171,7 +171,7 @@ class Admin extends CI_Controller {
     public function article_update(){
         if(empty(static::$user_session)) header('Location: '.base_url().'index.php/admin');
 
-        $input = $this->input->post(NULL, TRUE);
+        $input = $this->input->post();
 
         $this->admin_model->updateArticle($input);
 

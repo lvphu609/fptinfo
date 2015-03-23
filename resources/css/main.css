@@ -14,7 +14,7 @@ html, body {
 }
 .loading {
     background-color: #ffffff;
-    background-image: url("../images/loading.gif");
+    background-image: url("../images/ajax-loader.gif");
     background-repeat: no-repeat;
     background-position: 49%;
     width: 100%;
@@ -535,4 +535,13 @@ html, body {
 #myCarousel{
     max-height: 400px;
     overflow: hidden;
+}
+
+.article-pannel-item .panel-heading{
+    background-color: #f47f20;
+    margin-top: 10px;
+}
+
+.article-pannel-item .panel-heading strong{
+    color: #ffffff;
 }

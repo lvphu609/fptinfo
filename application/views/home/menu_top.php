@@ -22,7 +22,7 @@
                         <li><a href="<?php echo base_url(); ?>index.php/home/article/<?php echo $mn_top['article_id']; ?>" ><?php echo $mn_top['name']; ?></a></li>
                     <?php endforeach; ?>
                 <?php endif; ?>
-                <li><a href="#" >TUYỂN DỤNG</a></li>
+                <!-- <li><a href="#" >TUYỂN DỤNG</a></li> -->
             </ul>
         </div>
     </nav>
