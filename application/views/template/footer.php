@@ -18,6 +18,9 @@
                     <div class="col-xs-6"><h4>Hotline: <strong>0939 698088</strong></h4></div>
                     <div class="col-xs-6"><h4>Email: <a href="mailto:linhntt23@fpt.com.vn">linhntt23@fpt.com.vn</a></h4></div>
                 </div>
+                 <div class="footer pull-right">
+                   <p>Copyright © 2015 FPT</p>
+                 </div>
             </div>
 
         </div>

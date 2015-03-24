@@ -16,10 +16,10 @@ body{
 .avatar{
   background: url('../images/logo.png');
   width: 200px;
-  height: 80px;
+  height: 100px;
   margin-top: -60px;
   margin-left: -5px;
-  background-size: 100px 70px;
+  background-size: 100px;
   background-repeat: no-repeat;
   
 }

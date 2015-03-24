@@ -59,7 +59,7 @@ class Admin_model extends CI_Model {
     return $results[0];
   }
   
-  public function articleList($paging_limit,$page = NULL,$data_filter = NULL){
+  public function articleList($paging_limit,$page = NULL,$search,$data_filter = NULL){
     $this->db->from('articles');
     $this->db->where('deleted_at',NULL);
     if ($page !== null)
@@ -67,6 +67,23 @@ class Admin_model extends CI_Model {
       $begin = ($page - 1)*$paging_limit;
       $this->db->limit($paging_limit, $begin);
     }
+
+    if(!empty($search)){
+      if($search != ""){
+        $this->db->like('content',$search);
+        $this->db->or_like('title',$search);
+        $this->db->or_like('desc',$search);
+      }
+    }
+
+    $query = $this->db->get();
+    $result = $query->result_array();
+    return $result;
+  }
+
+   public function articleListAll(){
+    $this->db->from('articles');
+    $this->db->where('deleted_at',NULL);
     $query = $this->db->get();
     $result = $query->result_array();
     return $result;
@@ -92,9 +109,21 @@ class Admin_model extends CI_Model {
 
   }
 
-  public function countRecord($table){
+  public function countRecord($table,$search = NULL){
     $this->db->from($table);
     $this->db->where('deleted_at',NULL);
+    if(!empty($search)){
+      if($search!=""){
+        if($table == "articles"){
+          $this->db->like('content',$search);
+          $this->db->or_like('title',$search);
+          $this->db->or_like('desc',$search);
+        }
+        if($table == "menu"){
+          $this->db->like('name',$search);
+        }
+      }
+    }
     $total = $this->db->count_all_results();
     return $total;
   }
@@ -205,7 +234,7 @@ class Admin_model extends CI_Model {
 
   }
 
-  public function menuList($paging_limit,$page = NULL,$data_filter = NULL){
+  public function menuList($paging_limit,$page = NULL,$search,$data_filter = NULL){
     $this->db->select('me.id,me.name,me.positions,me.sort_order,me.parent,me.article_id,art.title');
     $this->db->from('menu as me');
     $this->db->where('me.deleted_at',NULL);
@@ -216,6 +245,22 @@ class Admin_model extends CI_Model {
       $begin = ($page - 1)*$paging_limit;
       $this->db->limit($paging_limit, $begin);
     }
+    if(!empty($search)){
+      if($search != ""){
+        $this->db->like('me.name',$search);
+      }
+    }
+    $query = $this->db->get();
+    $result = $query->result_array();
+    return $result;
+  }
+
+  public function menuListAll(){
+    $this->db->select('me.id,me.name,me.positions,me.sort_order,me.parent,me.article_id,art.title');
+    $this->db->from('menu as me');
+    $this->db->where('me.deleted_at',NULL);
+    $this->db->join('articles as art','me.article_id = art.id','left');
+    $this->db->order_by('me.sort_order','ASC');
     $query = $this->db->get();
     $result = $query->result_array();
     return $result;

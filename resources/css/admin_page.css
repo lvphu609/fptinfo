@@ -16,7 +16,7 @@
 	width: 200px;
 	height: 80px;
 	margin-top: -8px;
-	background-size: 75px 40px;
+	background-size: 40px;
 	background-repeat: no-repeat;
 }
 
@@ -101,4 +101,8 @@ margin-left: 2.5%;
 
 tr.cursor_pointer{
   cursor: pointer !important;
+}
+
+.btn-view-all{
+  padding: 15px;
 }
