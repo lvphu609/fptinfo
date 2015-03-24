@@ -72,7 +72,7 @@ class Admin extends CI_Controller {
 
         //paging----
         $page = 1;
-
+        $search = "";
         if(isset($_GET['page'])){
           if(!empty($_GET['page'])&&$_GET['page']!=""&&$_GET['page']!=null&&  is_numeric($_GET['page'])){
             $page = intval($_GET['page']);
@@ -82,11 +82,18 @@ class Admin extends CI_Controller {
           if(!empty($_POST['page'])&&$_POST['page']!=""&&$_POST['page']!=null&&  is_numeric($_POST['page'])){
             $page = intval($_POST['page']);
           }
-        }        
+        }     
+
+        if(isset($_GET['search'])){
+          if(!empty($_GET['search'])&&$_GET['search']!=""){
+            $search = trim($_GET['search']);
+          }
+        }
+           
         
         $this->load->library('fpt_paging');
-        $config['base_url'] = base_url('index.php/admin/article_list?');
-        $config['total_rows'] = $this->admin_model->countRecord('articles');
+        $config['base_url'] = base_url('index.php/admin/article_list?search='.$search.'&');
+        $config['total_rows'] = $this->admin_model->countRecord('articles',$search);
         $config['per_page'] = static::$paging_limit;
         $config['cur_page'] =$page;
 
@@ -95,13 +102,25 @@ class Admin extends CI_Controller {
         $pagination = $this->fpt_paging->create_links();
         //end paging---
 
-        $data['article_list'] = $this->admin_model->articleList(static::$paging_limit,$page);
+        $data['article_list'] = $this->admin_model->articleList(static::$paging_limit,$page,$search);
         $data['pagination'] = $pagination;
+        $data['js_file'] = static::$dataJs;
+        $data['css_file'] = static::$dataCss;
+        $data['search'] = $search;
+        $this->load->view('admin/pages/header',$data);
+        $this->load->view('admin/pages/menu');
+        $this->load->view('admin/pages/article_list',$data);
+        $this->load->view('admin/pages/footer');
+    }
+
+    public function article_list_all(){
+        if(empty(static::$user_session)) header('Location: '.base_url().'index.php/admin'); 
+        $data['article_list'] = $this->admin_model->articleListAll();
         $data['js_file'] = static::$dataJs;
         $data['css_file'] = static::$dataCss;
         $this->load->view('admin/pages/header',$data);
         $this->load->view('admin/pages/menu');
-        $this->load->view('admin/pages/article_list',$data);
+        $this->load->view('admin/pages/article_list_all',$data);
         $this->load->view('admin/pages/footer');
     }
 
@@ -267,7 +286,7 @@ class Admin extends CI_Controller {
 
         //paging----
         $page = 1;
-
+        $search = "";
         if(isset($_GET['page'])){
           if(!empty($_GET['page'])&&$_GET['page']!=""&&$_GET['page']!=null&&  is_numeric($_GET['page'])){
             $page = intval($_GET['page']);
@@ -277,11 +296,17 @@ class Admin extends CI_Controller {
           if(!empty($_POST['page'])&&$_POST['page']!=""&&$_POST['page']!=null&&  is_numeric($_POST['page'])){
             $page = intval($_POST['page']);
           }
-        }        
+        }      
+
+        if(isset($_GET['search'])){
+          if(!empty($_GET['search'])&&$_GET['search']!=""){
+            $search = trim($_GET['search']);
+          }
+        }  
         
         $this->load->library('fpt_paging');
-        $config['base_url'] = base_url('index.php/admin/menu?');
-        $config['total_rows'] = $this->admin_model->countRecord('menu');
+        $config['base_url'] = base_url('index.php/admin/menu?search='.$search.'&');
+        $config['total_rows'] = $this->admin_model->countRecord('menu',$search);
         $config['per_page'] = static::$paging_limit;
         $config['cur_page'] =$page;
 
@@ -290,13 +315,24 @@ class Admin extends CI_Controller {
         $pagination = $this->fpt_paging->create_links();
         //end paging---
 
-        $data['menu_list'] = $this->admin_model->menuList(static::$paging_limit,$page);
+        $data['menu_list'] = $this->admin_model->menuList(static::$paging_limit,$page,$search);
         $data['pagination'] = $pagination;
-
+        $data['search'] = $search;
         $data['css_file'] = static::$dataCss;
         $this->load->view('admin/pages/header',$data);
         $this->load->view('admin/pages/menu');
         $this->load->view('admin/pages/menu_list',$data);
+        $this->load->view('admin/pages/footer');
+
+    }
+
+    public function menu_all(){
+        if(empty(static::$user_session)) header('Location: '.base_url().'index.php/admin');
+        $data['menu_list'] = $this->admin_model->menuListAll();
+        $data['css_file'] = static::$dataCss;
+        $this->load->view('admin/pages/header',$data);
+        $this->load->view('admin/pages/menu');
+        $this->load->view('admin/pages/menu_all',$data);
         $this->load->view('admin/pages/footer');
 
     }
@@ -323,10 +359,10 @@ class Admin extends CI_Controller {
 
     public function ajax_article_paging(){
         $page = $this->input->post('page');
-        $numArticleRecord = $this->admin_model->countRecord('articles');
+        $numArticleRecord = $this->admin_model->countRecord('articles',null);
 
         $content = array(
-          'list_article' => $this->admin_model->articleList(static::$paging_ajax_limit,$page)
+          'list_article' => $this->admin_model->articleList(static::$paging_ajax_limit,$page,null)
         );
 
         $html = $this->load->view('admin/pages/list_article_paging', $content, true);
